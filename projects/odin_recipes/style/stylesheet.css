@@ -30,7 +30,7 @@ nav ul {
 }
 
 p {
-
+    font-size: 18px;
 }
 section {
     border: solid;
@@ -44,4 +44,8 @@ section {
     margin-right: auto;
 }
 
+.headerPicture {
+    width:20vw;
+    height:20vh;
+}
 
