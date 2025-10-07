@@ -1,3 +1,4 @@
+/* Ordered from least to most specific */
 a{
     color: #E5E7EB;
     list-style: none;
@@ -13,20 +14,31 @@ body {
 button{
     background-color: #3882F6;
     border-radius: 5px;
-    border-color: #F9FaF8;
+    border-color: #3882F6;
     color: #F9FaF8;
 }
 
+div{
+    display: flex;
+    flex: 1;
+}
 
 h1{
     font-size: 48px;
     color:#F9FaF8;
     font-weight: 900;
+    margin: 0 0 8px 0;
 }
 
 h2{
     font-size: 36px;
     color:#1F2937;
+    margin: 0 0 8px 0;
+}
+
+img{
+    max-width: 300px;
+    max-height: 200px;
 }
 
 nav{
@@ -40,6 +52,7 @@ nav{
 p{
     font-size: 18px;
     color: #E5E7EB;
+    margin: 0 0 8px 0;
 }
 
 ul{
@@ -50,7 +63,8 @@ ul{
 }
 
 .banner{
-    width: 20%;
+    max-width: 400px;
+    max-height: 400px;
 }
 
 header, footer, .container{
@@ -64,10 +78,25 @@ header, footer{
     align-items:center;
 }
 
+.left, .right{
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.left{
+    align-items: flex-start;
+}
+
 .logo{
     max-width: 200px;
     max-height: 100px;
     margin: 0 8px;
+}
+
+.container.img{
+    flex-direction: column;
 }
 
 .container.intro{
@@ -78,6 +107,7 @@ header, footer{
 .container.content_box{
     background-color: #F9FaF8;
     flex-direction: column;
+    align-items: center;
 }
 
 .container.quote{
@@ -91,7 +121,7 @@ header, footer{
     color: #1F2937;
     font-weight: 300;
     justify-content: space-between;
-    margin: 200px; 
+    margin: 200px;
 }
 
 .container.quote > p{
@@ -102,4 +132,17 @@ header, footer{
     list-style: "-";
     justify-content: end;
     font-weight: 900;
+}
+
+.container.img > img{
+    border: 2px solid #3882F6;
+    border-radius: 5px;
+}
+
+.container.img > p{
+    color: #1F2937;
+}
+
+#CTA_signup{
+    border-color: #E5E7EB;
 }
