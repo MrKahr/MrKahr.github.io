@@ -33,7 +33,7 @@ h1{
 h2{
     font-size: 36px;
     color:#1F2937;
-    margin: 0 0 8px 0;
+    margin: 8px 0 32px 0;
 }
 
 img{
@@ -78,6 +78,10 @@ header, footer{
     align-items:center;
 }
 
+.left > h2{
+    color: #E5E7EB;
+}
+
 .left, .right{
     width: 50%;
     flex-direction: column;
@@ -105,6 +109,7 @@ header, footer{
 }
 
 .container.content_box{
+    margin-top: 32px;
     background-color: #F9FaF8;
     flex-direction: column;
     align-items: center;
@@ -126,6 +131,8 @@ header, footer{
 
 .container.quote > p{
     color: #1F2937;
+    padding: 48px;
+    font-size: 28px;
 }
 
 .container.quote > ul {
@@ -145,4 +152,5 @@ header, footer{
 
 #CTA_signup{
     border-color: #E5E7EB;
+    width: 100px; 
 }
