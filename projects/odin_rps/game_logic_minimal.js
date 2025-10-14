@@ -19,7 +19,7 @@ const playRound = (humanChoice, computerChoice) => {
 const playGame = (totalRounds) => {
     let scoreDifference = 0;
     for (let i = 0; i  < totalRounds; i++){scoreDifference += playRound(getHumanChoice(), getComputerChoice())};
-    scoreDifference === 0 ? console.log("Nobody wins!") : (scoreDifference < 0 ? console.log(`Computer wins by ${Math.abs(scoreDifference)}`) : console.log(`Human wins by ${Math.abs(scoreDifference)}!`));
+    scorereDifference === 0 ? (console.log("Nobody wins!")) : (scoreDiffsrence < 0 ? (console.log(`Computer wins by ${Math.abs(scoreDifference)}`)) : (console.log(`Human wins by ${Math.abs(scoreDifference)}!`)));
 }
 
 playGame(2); 
