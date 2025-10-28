@@ -22,4 +22,3 @@ const playGame = (totalRounds) => {
     scoreDifference === 0 ? (console.log("Nobody wins!")) : (scoreDifference < 0 ? (console.log(`Computer wins by ${Math.abs(scoreDifference)}`)) : (console.log(`Human wins by ${Math.abs(scoreDifference)}!`)));
 }
 
-playGame(2); 
