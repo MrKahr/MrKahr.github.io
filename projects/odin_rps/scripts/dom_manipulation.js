@@ -10,34 +10,8 @@
 8) Refine error handling 
 9) commit and push
 */
+const eventListenerTable = {
 
-const operationModifier = ["DELETE", "ADD", "MODIFY"];
-
-function onClick(){
-
-}
-
-// Creates, modifies or deletes an item or a list
-function updateList(list,item, operationModifier){
-
-}
-
-function addChildren(parent, ...children) {
-    if (!parent || !children) {
-        throw new ReferenceError(`Undefined family members provided as: Parent: ${parent}, Children: ${children}`);
-    }
-    if (!(parent instanceof Node)) {
-        throw new TypeError(`Parent is not a DOM Node: ${parent}`);
-    }
-    for (const child of children) {
-        if (!child) { 
-            console.warn(`Cannot append undefined child node to parent: ${parent}`);
-            continue;
-        } else {
-            parent.appendChild(child);
-        }
-
-    }
 }
 
 function createElement(tag, attributes = {}, ...children) {
@@ -61,4 +35,55 @@ function createElement(tag, attributes = {}, ...children) {
     addChildren(element, ...children);
 
     return element;
+}
+
+function removeElement(element){
+    // ensure safe removal of 
+    // EVENT LISTENERS, CHILDREN,
+    if(!element){
+        console.warn(`Cannot remove element: ${element}`)
+    } else {
+        // #TODO: come up with good plan for keeping track of event listenrs
+        element.event
+        removeChildren(element);
+        element.remove();
+    }
+}
+
+
+function modifyElement(element,attribute, data){
+    if (!element) {
+        throw new ReferenceError(`Cannot modify element: ${element}`);
+    } else {
+        element.attribute = data;
+    }
+}
+
+function addChildren(parent, ...children) {
+    if (!parent || !children) {
+        throw new ReferenceError(`Undefined family members provided as: Parent: ${parent}, Children: ${children}`);
+    }
+    if (!(parent instanceof Node)) {
+        throw new TypeError(`Parent is not a DOM Node: ${parent}`);
+    }
+    for (const child of children) {
+        if (!child) { 
+            console.warn(`Cannot append undefined child node to parent: ${parent}`);
+            continue;
+        } else {
+            parent.appendChild(child);
+        }
+
+    }
+}
+
+function removeChildren(parent){
+    if (!(parent instanceof Node)) {
+        console.warn(`Parent is not a DOM Node: ${parent}`);
+        return;
+    }
+
+    while(parent.firstChild){
+        removeElement(parent.firstChild);
+    }
 }
