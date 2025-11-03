@@ -10,16 +10,16 @@ function createPage() {
     let content, resetbutton, buttons = [], scoreContainer, scores;
 
     // I know I can make objects with constructors that are better suited for this, but I wanted to challenge myself in the spirit of this exercise 
-    scores = createElement("ol", "entries");
-    scoreContainer = createElement("div", "container");
+    scores = createElement("ol", "entries", {}, []);
+    scoreContainer = createElement("div", "container", {}, []);
     content = createElement("div", "container",{}, [scoreContainer]);
-    resetbutton = createElement("button", "button", {"listeners": {
+    resetbutton = createElement("button", "button", {"properties":{"textContent": "RESET"}, "listeners": {
         "onClick": () => {
             scoreDifference = 0;
             let currentScores = document.querySelector(".scores");
             removeChildren(currentScores);
         }
-    }});
+    }},[]);
     for (let i = 0; i < choices.length; i++) {
         buttons[i] = createElement(
             "button", 
@@ -35,21 +35,22 @@ function createPage() {
                 rounds++;
 
                 // Register the entry on the scoreboard 
-                let entries = document.querySelector(".scores");
-                let entry = createElement("li", "entry", {"properties": {"textContent":getRoundMessage(result, humanChoice, computerChoice)}});
+                let entries = document.querySelector(".entries");
+                let entry = createElement("li", "entry", {"properties": {"textContent":getRoundMessage(result, humanChoice, computerChoice)}},[]);
                 entries.appendChild(entry);
 
                 if(rounds === maxRounds){
-                    entry = createElement("li", "entry", {"properties": {"textContent":"Final tally:" + getRoundMessage(scoreDifference, humanChoice, computerChoice) + "restting game!"}});
+                    entry = createElement("li", "entry", {"properties": {"textContent":"Final tally:" + getRoundMessage(scoreDifference, humanChoice, computerChoice) + "restting game!"}},[]);
                     entries.append(entry);
                     scoreDifference = 0;
-                    let currentScores =  document.querySelector(".scores");
+                    rounds = 0;
+                    let currentScores =  document.querySelector(".entires");
                     removeChildren(currentScores);
                 }
 
             }
         }
-    });
+    },[]);
     }; 
     addChildren(content, [scores,...buttons, resetbutton]); 
     document.body.appendChild(content);
