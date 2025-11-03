@@ -10,25 +10,66 @@
 8) Refine error handling 
 9) commit and push
 */
-const eventListenerTable = {
 
+export { createElement, registerListener, deregisterListener, addChildren, removeChildren };
+
+const eventListenerTable = new Map();
+
+function registerListener(element, type, callbackfn) {
+    if (eventListenerTable[element][type]) {
+        console.warn(`Listener is already defined in table of type ${element}`);
+        return;
+    } else if (!(element instanceof Node)) {
+        console.warn(`Cannot register listener to element that is not a node`);
+        return;
+    } else if (!callbackfn instanceof Function) {
+        console.warn(`Cannot register invalid function to element. Function given as: ${callbackfn}`);
+        return;
+    } else {
+        element.addEventListener(type, callbackfn);
+        eventListenerTable.set(element, { type: callbackfn });
+    }
 }
 
-function createElement(tag, attributes = {}, ...children) {
-    const element = document.createElement(tag);
+function deregisterListener(element, type) {
+    let listeners = eventListenerTable[element];
+    if (!listeners) {
+        console.warn(`Listeners not defined on: ${element}`);
+        return;
+    }
+    element.removeEventListener(listener[type]);
+    eventListenerTable.delete(element);
+}
 
-    attributes.entires(attributes).forEach((key, value) => {
-        let isEventFunction = (key.startsWith("on")) && typeof value === "function";
-        let isStyle = typeof value === "object";
+function createElement(tag, className = "", attributes = {}, ...children) {
+    const element = document.createElement(tag);
+    if (className) {
+        element.classList.add(className);
+    }
+
+
+    Object.entries(attributes).forEach(([key, value]) => {
+        let isEventFunction = key === "listeners" && typeof value === "object";
+        let isStyle = key === "style" && typeof value === "object";
+        let isproperties = key === "properties" && typeof value === "object";
+
 
         if (isEventFunction) {
-            const eventName = key.split("on")[1].toLowerCase();
-            element.addEventListener(eventName, value);
+            Object.entries(value).forEach(([listenerkey, listenertvalue]) => {
+                const eventName = listenerkey.split("on")[1].toLowerCase();
+                element.addEventListener(eventName, listenertvalue);
+            });
         }
         else if (isStyle) {
-            element.style.key = value; 
+            Object.entries(value).forEach(([stylekey, stylevalue]) => {
+                element.style[stylekey] = stylevalue;
+            });
+        } else if (isproperties) {
+            Object.entries(value).forEach(([propertykey, propertyvalue]) => {
+                element[propertykey] = propertyvalue;
+            });
         } else {
-            element.key = value;
+            element[key] = value;
         }
     });
 
@@ -37,21 +78,21 @@ function createElement(tag, attributes = {}, ...children) {
     return element;
 }
 
-function removeElement(element){
-    // ensure safe removal of 
-    // EVENT LISTENERS, CHILDREN,
-    if(!element){
-        console.warn(`Cannot remove element: ${element}`)
-    } else {
-        // #TODO: come up with good plan for keeping track of event listenrs
-        element.event
-        removeChildren(element);
-        element.remove();
+function removeElement(element) {
+    let registerEntry = eventListenerTable.get(element);
+    if (!element) {
+        console.warn(`Cannot remove element: ${element}`);
+    } else if(registerEntry){
+        for (listener of registerEntry)
+            deregisterListener(element, listener[type]);
     }
+    removeChildren(element);
+    element.remove();
 }
 
 
-function modifyElement(element,attribute, data){
+
+function modifyElement(element, attribute, data) {
     if (!element) {
         throw new ReferenceError(`Cannot modify element: ${element}`);
     } else {
@@ -59,7 +100,7 @@ function modifyElement(element,attribute, data){
     }
 }
 
-function addChildren(parent, ...children) {
+function addChildren(parent, children) {
     if (!parent || !children) {
         throw new ReferenceError(`Undefined family members provided as: Parent: ${parent}, Children: ${children}`);
     }
@@ -67,7 +108,7 @@ function addChildren(parent, ...children) {
         throw new TypeError(`Parent is not a DOM Node: ${parent}`);
     }
     for (const child of children) {
-        if (!child) { 
+        if (!(child instanceof Node)) {
             console.warn(`Cannot append undefined child node to parent: ${parent}`);
             continue;
         } else {
@@ -77,13 +118,13 @@ function addChildren(parent, ...children) {
     }
 }
 
-function removeChildren(parent){
+function removeChildren(parent) {
     if (!(parent instanceof Node)) {
         console.warn(`Parent is not a DOM Node: ${parent}`);
         return;
     }
 
-    while(parent.firstChild){
+    while (parent.firstChild) {
         removeElement(parent.firstChild);
     }
 }

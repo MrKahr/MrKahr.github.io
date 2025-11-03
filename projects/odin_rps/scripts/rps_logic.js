@@ -1,6 +1,8 @@
+export {choices, playRound, getComputerChoice, getRoundMessage};
+
 const choices = ["ROCK", "PAPER", "SCISSORS"];
 
-const wins = {
+const beats = {
     ROCK: "SCISSORS",
     PAPER: "ROCK",
     SCISSORS: "PAPER"
@@ -8,17 +10,25 @@ const wins = {
 
 const getComputerChoice = () => choices[Math.floor(Math.random() * choices.length)];
 
-const getHumanChoice = () => prompt("Choose rock, paper or scissors").toUpperCase();
-
 const playRound = (humanChoice, computerChoice) => {
-    console.log(`Human chose ${humanChoice}! Computer chose ${computerChoice}`)
-    if (humanChoice === computerChoice) { return 0; }
-    else { return wins[humanChoice] === computerChoice ? 1 : -1; }
+    if(humanChoice === computerChoice){
+        return 0;
+    } else if (beats[humanChoice] === computerChoice){
+        return 1;
+    } else {
+        // Computer beats human
+        return -1;
+    };
 };
 
-const playGame = (totalRounds) => {
-    let scoreDifference = 0;
-    for (let i = 0; i < totalRounds; i++) { scoreDifference += playRound(getHumanChoice(), getComputerChoice()) };
-    scoreDifference === 0 ? (console.log("Nobody wins!")) : (scoreDifference < 0 ? (console.log(`Computer wins by ${Math.abs(scoreDifference)}`)) : (console.log(`Human wins by ${Math.abs(scoreDifference)}!`)));
+const getRoundMessage = (result, humanChoice, computerChoice) => {
+    let message = `Human chose: ${humanChoice} - Computer chose: ${computerChoice} - `;
+    if(result === 0){
+        message + `it's a tie!`;
+    } else if(result > 0){
+        message + 'human wins!';
+    } else {
+        message + 'computer wins!';
+    }
+    return message;
 }
-
