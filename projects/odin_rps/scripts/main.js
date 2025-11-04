@@ -7,12 +7,18 @@ let rounds = 0;
 let scoreDifference = 0; 
 
 function createPage() {
-    let content, resetbutton, buttons = [], figures = [], scoreContainer, entries;
+    let resetbutton, entries;
+    let buttons = [], figures = [];
+    let contentContainer, scoreContainer, figureContainer, buttonContainer;
 
     // I know I can make objects with constructors that are better suited for this, but I wanted to challenge myself in the spirit of this exercise 
-    entries = createElement("ul", "entries", {}, []);
+
+  
+    contentContainer = createElement("div", "container", {}, []);
     scoreContainer = createElement("div", "scoreContainer", {}, []);
-    content = createElement("div", "container",{}, [scoreContainer]);
+    buttonContainer = createElement("div", "buttonContainer",{}, []);
+    figureContainer = createElement("div", "figureContainer", {}, []);
+    entries = createElement("ul", "entries", {}, []);
     resetbutton = createElement("button", "button", {"properties":{"textContent": "RESET"}, "listeners": {
         "onClick": () => {
             rounds = 0;
@@ -30,11 +36,13 @@ function createPage() {
             {
                 "properties": {
                     "src": `./assets/${choices[i].toLocaleLowerCase()}.png`,
-                    "alt": `Hand drawn placeholder for ${choices[i]}`
+                    "alt": `Hand drawn placeholder for ${choices[i]}`,
+                    "height": "320",
+                    "width": "320"
                 }
             }, 
             []
-        )
+        );
         buttons[i] = createElement(
             "button", 
             "choice", 
@@ -70,10 +78,12 @@ function createPage() {
     },[]);
     }; 
 
-    addChildren(content, [scoreContainer, resetbutton, ...buttons]);
-    scoreContainer.appendChild(entries); 
+    addChildren(contentContainer, [figureContainer, buttonContainer, scoreContainer]);
+    addChildren(scoreContainer, [entries]);
+    addChildren(buttonContainer, [resetbutton, ...buttons]);
+    addChildren(figureContainer, figures);
 
-    document.body.appendChild(content);
+    document.body.appendChild(contentContainer);
 
 };
 

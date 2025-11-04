@@ -11,6 +11,10 @@ const beats = {
 const getComputerChoice = () => choices[Math.floor(Math.random() * choices.length)];
 
 const playRound = (humanChoice, computerChoice) => {
+    if(!humanChoice in choices){
+        throw new TypeError(`Human cannot choose: ${humanChoice}`);
+    }
+
     if(humanChoice === computerChoice){
         return 0;
     } else if (beats[humanChoice] === computerChoice){
@@ -22,6 +26,10 @@ const playRound = (humanChoice, computerChoice) => {
 };
 
 const getRoundMessage = (result, humanChoice, computerChoice) => {
+    if(!humanChoice in choices){
+        throw new TypeError(`Human cannot choose: ${humanChoice}`);
+    }
+
     let message = `Human chose: ${humanChoice} - Computer chose: ${computerChoice} - `;
     if(result === 0){
         message += `it's a tie!`;
