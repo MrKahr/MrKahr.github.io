@@ -7,8 +7,7 @@
 5) Refine and refactor 
 6) Refine project structure 
 7) Refine and refactor 
-8) Refine error handling 
-9) commit and push
+8) commit and push
 */
 
 export { createElement, registerListener, deregisterListener, addChildren, removeChildren };
