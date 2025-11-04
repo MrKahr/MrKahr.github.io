@@ -1,4 +1,4 @@
-export {choices, playRound, getComputerChoice, getRoundMessage};
+export {choices, playRound, getComputerChoice, getRoundMessage, getFinalMessage};
 
 const choices = ["ROCK", "PAPER", "SCISSORS"];
 
@@ -24,11 +24,21 @@ const playRound = (humanChoice, computerChoice) => {
 const getRoundMessage = (result, humanChoice, computerChoice) => {
     let message = `Human chose: ${humanChoice} - Computer chose: ${computerChoice} - `;
     if(result === 0){
-        message + `it's a tie!`;
+        message += `it's a tie!`;
     } else if(result > 0){
-        message + 'human wins!';
+        message += 'human wins!';
     } else {
-        message + 'computer wins!';
+        message += 'computer wins!';
     }
     return message;
+}
+
+const getFinalMessage = (result) => {
+    if(result > 0){
+        return "Human wins!";
+    } else if(result < 0){
+        return "Computer wins!";
+    } else {
+        return "It's a tie!";
+    }
 }
