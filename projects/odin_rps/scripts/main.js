@@ -1,3 +1,4 @@
+import { createContext } from "react";
 import { createElement, addChildren, removeChildren } from "./dom_manipulation.js"
 import { choices, playRound, getComputerChoice, getRoundMessage, getFinalMessage } from "./rps_logic.js";
 
@@ -47,13 +48,13 @@ class GameState {
 }
 
 // Aux functions 
-function resetGame(gameState, scores) {
+function resetGame(gameState, moves) {
     gameState.reset();
-    removeChildren(scores);
+    removeChildren(moves);
 };
 
-function handleClickChoice(humanChoice, gameState, scores) {
-    removeChildren(scores);
+function handleClickChoice(humanChoice, gameState, moves) {
+    removeChildren(moves);
 
     const computerChoice = getComputerChoice();
     let result = playRound(humanChoice, computerChoice);
@@ -63,11 +64,11 @@ function handleClickChoice(humanChoice, gameState, scores) {
 
     // Register the entry on the scoreboard 
     let entry = createElement("li", "entry", { "properties": { "textContent": getRoundMessage(result, humanChoice, computerChoice) } }, []);
-    scores.appendChild(entry);
+    moves.appendChild(entry);
 
     if (gameState.isGameOver()) {
         entry = createElement("li", "entry", { "properties": { "textContent": `Final tally: ${getFinalMessage(gameState.getScoreDifference())} - resetting game!`} }, []);
-        scores.append(entry);
+        moves.append(entry);
         gameState.reset();
 
     }
@@ -78,20 +79,22 @@ function createPage() {
     let game = new GameState(5);
 
     // Dom-variable decl 
-    let resetButton, scores;
+    let resetButton, moves, tally;
     let buttons = [], figures = [];
-    let contentContainer, scoreContainer, figureContainer, buttonContainer;
+    let contentContainer, moveContainer, figureContainer, buttonContainer;
 
     // Dom-variable init 
     contentContainer = createElement("div", "container", {}, []);
-    scoreContainer = createElement("div", "scoreContainer", {}, []);
+    moveContainer = createElement("div", "moveContainer", {}, []);
     buttonContainer = createElement("div", "buttonContainer", {}, []);
     figureContainer = createElement("div", "figureContainer", {}, []);
-    scores = createElement("ul", "scores", {}, []);
-    resetButton = createElement("button", "button", {
+    moves = createElement("ul", "moves", {}, []);
+    tally = createElement("")
+    
+    resetButton = createElement("button", "resetButton", {
         "properties": { "textContent": "RESET" }, "listeners": {
             "onClick": () => {
-                resetGame(game, scores);
+                resetGame(game, moves);
             }
         }
     }, []);
@@ -111,16 +114,16 @@ function createPage() {
             "listeners": {
                 "onClick": () => {
                     let humanChoice = choice;
-                    handleClickChoice(humanChoice, game, scores);
+                    handleClickChoice(humanChoice, game, moves);
                 }
             }
         }, []);
     });
 
     // Append 
-    addChildren(contentContainer, [figureContainer, buttonContainer, scoreContainer]);
-    addChildren(scoreContainer, [scores]);
-    addChildren(buttonContainer, [resetButton, ...buttons]);
+    addChildren(contentContainer, [figureContainer, buttonContainer, moveContainer]);
+    addChildren(moveContainer, [moves]);
+    addChildren(buttonContainer, [...buttons, resetButton]);
     addChildren(figureContainer, figures);
 
     document.body.appendChild(contentContainer);

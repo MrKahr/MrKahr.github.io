@@ -1,3 +1,18 @@
-document {
+.container{
+    margin: 2vh 10vw; 
+    display: flex;
+    flex-direction: column;
+}
 
+.container > *{
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    border-radius: 5px; 
+}
+
+.resetButton{
+    background-color: beige;
 }
