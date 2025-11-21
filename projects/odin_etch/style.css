@@ -1,0 +1,9 @@
+html{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+h1{
+   display: flex;
+   justify-content: center; 
+}
