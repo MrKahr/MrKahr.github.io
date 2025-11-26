@@ -20,20 +20,20 @@ function createElement(tag, className, text, event, callback) {
 
 /* GRID */ 
 function colorGrid(){
-    let color = Color.generateColor();
+    let color = Color.generateColor('rgb');
     let squares = document.querySelectorAll('.grid__square');
     squares.forEach(
         (square) => {
-            square.style.background = color;
+            square.style.backgroundColor = color.getrgb();
         }
     )
 }
 
-function resetGrid() {
+function resetOpacity() {
     let squares = document.querySelectorAll('.grid__square');
     squares.forEach(
         (square) => {
-            square.opacity = 0;
+            square.style.opacity = 0;
         }
     )
 }
@@ -67,6 +67,7 @@ function modifyGrid(n) {
     }
 
     colorGrid();
+    resetOpacity();
 
     return grid;
 
@@ -92,14 +93,14 @@ function handleInput() {
         window.alert(`${value} is not an integer between 1 and 100`);
     }
 
-    input.value = "";
+    resetInput();
 
 }
 
 function handleGridReset(){
-    resetGrid();
     resetInput();
     colorGrid();
+    resetOpacity();
 }
 
 
