@@ -12,6 +12,10 @@ h1{
    justify-content: center; 
 }
 
+main > *{
+    margin: 2%;
+}
+
 .button-container {
     display: flex;
     justify-content: center;
@@ -25,10 +29,13 @@ h1{
 .grid{
     background-color: aliceblue;
     border: 2px solid black;
-    margin: 10vh 10vw;
-    width: 80vw;
-    height: 80vh; 
+    width: auto;
+    height: 1240px; 
+    justify-content: center;
     display: flex;
     flex-wrap: wrap;
 }
 
+.grid__square{
+    flex: 1;
+}
