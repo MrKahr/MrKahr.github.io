@@ -1,3 +1,4 @@
+// TODO: Documentation
 import { createElement, handleInput, handleGridReset} from "./Model.js"
 
 function createPage() {

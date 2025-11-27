@@ -1,3 +1,4 @@
+// TODO: Documentation 
 /* COLOR */ 
 class Color {
     static rgbPattern = /^(r|R){1}(g|G){1}(b|B){1}$/
@@ -29,4 +30,30 @@ class Color {
 
 }
 
-export {Color}
+function styleElement(element, styleObject = {}){
+    for(const key in styleObject){
+        element.style[key] = styleObject[key];
+    }
+}
+
+function colorGrid(){
+    let color = Color.generateColor('rgb');
+    let squares = document.querySelectorAll('.grid__square');
+    squares.forEach(
+        (square) => {
+            square.style.backgroundColor = color.getrgb();
+        }
+    )
+}
+
+function resetOpacity() {
+    let squares = document.querySelectorAll('.grid__square');
+    squares.forEach(
+        (square) => {
+            square.style.opacity = 0;
+        }
+    )
+}
+
+
+export {Color, styleElement, colorGrid, resetOpacity}
