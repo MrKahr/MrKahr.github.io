@@ -1,5 +1,6 @@
 // TODO: add documentation 
-console.log("loading module Handlers")
+import { resetInput, modifyGrid} from "./Model.js";
+
 function handleSquareColoring(event) {
     const square = event.target; 
 
