@@ -3,7 +3,7 @@ console.log("loading module Model")
 function createElement(tag, {classNames, text, eventHandlers} = {}) {
     const element = document.createElement(tag);
 
-    if (classNames && typeof eventHandlers === 'object') {
+    if (classNames && typeof classNames === 'object') {
         Object.values(classNames).forEach(
             (value) => {element.classList.add(value)});
     } 
