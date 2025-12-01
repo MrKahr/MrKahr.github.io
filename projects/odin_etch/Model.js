@@ -34,12 +34,12 @@ function modifyGrid(n) {
     let gridContainer = document.querySelector('.grid');
 
     if(!gridContainer){
-        gridContainer = createElement('div', {className:"grid", eventHandlers:{}});   
+        gridContainer = createElement('div', {classNames:["grid"], eventHandlers:{}});   
     }
 
     while (gridContainer.children.length < gridSize) {
         const square = createElement('div', 
-            {className: 'grid__square'}
+            {classNames: ['grid__square']}
         );
         gridContainer.appendChild(square);
     }
