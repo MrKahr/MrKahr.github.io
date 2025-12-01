@@ -1,20 +1,19 @@
-// TODO: Documentation 
-import * as Handlers from "./Handlers.js"
-
+// TODO: add documentation 
+console.log("loading module Model")
 function createElement(tag, {classNames, text, eventHandlers} = {}) {
     const element = document.createElement(tag);
 
-    if (classNames && typeof eventHandlers === Object) {
+    if (classNames && typeof eventHandlers === 'object') {
         Object.values(classNames).forEach(
             (value) => {element.classList.add(value)});
     } 
             
-    if (text && typeof text === Object) {
+    if (text && typeof text === 'object') {
         Object.values(text).forEach(
             (value) => {element.textContent = element.textContent + value});
     }; 
 
-    if(eventHandlers && typeof eventHandlers === Object){
+    if(eventHandlers && typeof eventHandlers === 'object'){
         Object.entries(eventHandlers).forEach(
             ([type,callback]) => {element.addEventListener(type,callback)});
     }
