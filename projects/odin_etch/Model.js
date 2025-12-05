@@ -33,6 +33,8 @@ function modifyGrid(n) {
     const gridSize = n * n;
     let gridContainer = document.querySelector('.grid');
 
+    document.documentElement.style.setProperty('--num_squares', n); // Set variable for controlling growth of grid  
+
     if(!gridContainer){
         gridContainer = createElement('div', {classNames:["grid"], eventHandlers:{}});   
     }

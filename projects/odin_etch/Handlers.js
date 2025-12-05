@@ -6,7 +6,7 @@ function handleSquareColoring(event) {
 
     if(square.style.opacity < 1){
         square.style.opacity += 0.1;
-    }
+}
 }
 
 function handleInput() {

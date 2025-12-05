@@ -29,16 +29,14 @@ main > *{
 .grid{
     background-color: aliceblue;
     border: 2px solid black;
-    width: auto;
-    height: 1240px; 
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
 }
 
 .grid__square{
-    flex: 1;
-    border-color: black;
-    border-style: solid;
-    border-width: 1px;
+    width: calc(100% / var(--num_squares));
+    border: 0.1px solid black; 
+    aspect-ratio: 1/1;
+    box-sizing: border-box;
 }
