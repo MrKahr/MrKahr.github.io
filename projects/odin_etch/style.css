@@ -1,0 +1,42 @@
+body{
+    background-color: beige;
+}
+
+html{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+}
+
+h1{
+   display: flex;
+   justify-content: center; 
+}
+
+main > *{
+    margin: 2%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button-container > *{
+    font-size: 1rem;
+}
+
+.grid{
+    background-color: aliceblue;
+    border: 2px solid black;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid__square{
+    width: calc(100% / var(--num_squares));
+    border: 0.1px solid black; 
+    aspect-ratio: 1/1;
+    box-sizing: border-box;
+}
