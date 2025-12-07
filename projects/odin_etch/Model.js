@@ -1,5 +1,4 @@
 // TODO: add documentation 
-console.log("loading module Model")
 function createElement(tag, {classNames, text, eventHandlers} = {}) {
     const element = document.createElement(tag);
 
@@ -15,7 +14,14 @@ function createElement(tag, {classNames, text, eventHandlers} = {}) {
 
     if(eventHandlers && typeof eventHandlers === 'object'){
         Object.entries(eventHandlers).forEach(
-            ([type,callback]) => {element.addEventListener(type,callback)});
+            ([type,callback]) => {
+                callback.forEach(
+                    (fn) => {
+                    element.addEventListener(type,fn)
+                }
+            )
+        }
+    );
     }
 
     return element;

@@ -1,5 +1,5 @@
 import { createElement } from "./Model.js"
-import { handleGridReset, handleInput } from "./Handlers.js"
+import { handleGridModify, handleInput, handleSquareColoring } from "./Handlers.js"
 
 function createPage() {
     const main = document.querySelector('main');
@@ -16,7 +16,7 @@ function createPage() {
         {
             classNames: ['container__reset-button'],
             text: ['Reset'],
-            eventHandlers: { 'click': handleGridReset }
+            eventHandlers: { 'click': [handleGridModify]}
         }
     );
 
@@ -26,7 +26,9 @@ function createPage() {
         {
             classNames: ['container__submit-button'],
             text: ['Submit'],
-            eventHandlers: { 'click': handleInput }
+            eventHandlers: { 
+                'click': [handleInput,handleGridModify]
+            }
         }
     );
 
@@ -39,7 +41,12 @@ function createPage() {
     // Grid 
     const grid = createElement(
         'div',
-        { classNames: ['grid'] }
+        { 
+            classNames: ['grid'], 
+            eventHandlers: {
+                'mouseover': [handleSquareColoring]
+            }
+        }
     );
     // Footer
     const footer = createElement('footer');

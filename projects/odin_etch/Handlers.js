@@ -1,11 +1,15 @@
 // TODO: add documentation 
 import { resetInput, modifyGrid} from "./Model.js";
+import { colorGrid, resetOpacity } from "./UI.js";
 
 function handleSquareColoring(event) {
+    console.log(`${event.target}`);
     const square = event.target; 
+    let  opacity = parseFloat(square.style.opacity) || 0; /* Fallback if opacity is not set*/
 
-    if(square.style.opacity < 1){
-        square.style.opacity += 0.1;
+    if(opacity < 1){
+        opacity += 0.1;
+        square.style.opacity = opacity;
 }
 }
 
@@ -22,10 +26,10 @@ function handleInput() {
 
 }
 
-function handleGridReset(){
+function handleGridModify(){
     resetInput();
     colorGrid();
     resetOpacity();
 }
 
-export {handleSquareColoring, handleInput, handleGridReset}
+export {handleSquareColoring, handleInput, handleGridModify}

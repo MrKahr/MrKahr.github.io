@@ -1,6 +1,5 @@
 // TODO: Documentation 
 /* COLOR */ 
-console.log("loading module UI")
 class Color {
     static rgbPattern = /^(r|R){1}(g|G){1}(b|B){1}$/
 
